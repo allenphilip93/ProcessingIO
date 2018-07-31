@@ -1,7 +1,7 @@
 int width, height;
 Game dinoGame;
 DinoAction action;
-
+PApplet app = this;
 void setup() {
   size(960, 540);
   

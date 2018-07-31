@@ -13,17 +13,16 @@ class Game {
   PFont font;
   PImage bg;
   int bgPosX;
-  Obstacle obstacle_1, obstacle_2;
   
   Game(int width, int height, int x, int y) {
     this.width = width;
     this.height = height;
     this.dinoPosX = x;
     this.dinoPosY = y;
-    this.jumpHeight = 150;
+    this.jumpHeight = 200;
     this.gameSpeed = 5;
     font = createFont("ArcadeClassic",16,true);
-    bg = loadImage("./data/bg_country_gs_new.png");
+    bg = loadImage("./data/bg_country_rgb.png");
     bg.resize(width, height);
     bgPosX = 0;
     this.highScore = 0;
@@ -62,6 +61,7 @@ class Game {
     dino.display();
     
     if (action.doAction()) {
+      dino.getHero().pause();
       action.jump(dino, gameSpeed);
     }
     

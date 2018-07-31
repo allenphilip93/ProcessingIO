@@ -1,3 +1,5 @@
+import gifAnimation.*;
+
 class Dino {
   // Declare member variables
   int x,y;
@@ -10,6 +12,7 @@ class Dino {
   int gameSpeed;
   int dinoSize;
   boolean isDinoAlive;
+  Gif hero;
   
   Dino(int x, int y, int gameSpeed) {
     this.x = x;
@@ -17,7 +20,7 @@ class Dino {
     this.gameSpeed = gameSpeed;
     
     isDinoAlive = true;
-    dinoSize = 70;
+    dinoSize = 120;
     dinoRun = new PImage[2];
     dinoRun[0] = loadImage("./data/dinorun1.png");
     dinoRun[0].resize(dinoSize,0);
@@ -30,11 +33,18 @@ class Dino {
     this.width = dinoRun[0].width;
     this.height = dinoRun[0].height;
     dinoActive = dinoRun[0];
+    
+    hero = new Gif(app, "./data/hero.gif");
+    float aspectRatio = hero.width*1./hero.height*1.;
+    this.height = 100;
+    this.width = (int) (aspectRatio * height);
+    hero.play();
   }
   
   void display() {
     imageMode(CENTER);
-    image(dinoActive, x, y);
+    //image(dinoActive, x, y);
+    image(hero, x, y, width, height);
     
     stroke(255, 0, 0);
     fill(0, 0);
@@ -58,6 +68,11 @@ class Dino {
   void dead() {
     dinoActive = dinoDead;
     isDinoAlive = false;
+    hero.pause();
+  }
+  
+  Gif getHero() {
+    return hero; 
   }
   
   void move(int offsetX, int offsetY) {

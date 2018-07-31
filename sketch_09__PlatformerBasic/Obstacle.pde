@@ -1,20 +1,31 @@
+import gifAnimation.*;
+
 class Obstacle {
   int posX, posY;
   int width, height;
   PImage img;
+  Gif obstacleGif;
   
-  Obstacle(int posX, int posY) {
+  Obstacle(int posX, int posY, String giphyTag) {
     this.posX = posX;
     this.posY = posY;
-    this.width = (int) random(40,60);
-    this.height = (int) random(40, 60);
+    obstacleGif = new Gif(app, "./data/obstacles/" + giphyTag + ".gif");
+    float aspectRatio = obstacleGif.width*1./obstacleGif.height*1.;
+    this.height = 100;
+    this.width = (int) (aspectRatio * height);
+    obstacleGif.play();
   }
   
   void display() {
+    
+    imageMode(CENTER);
+    image(obstacleGif, posX, posY, width, height);
+    
     stroke(255, 0, 0);
-    fill(255);
+    fill(255, 0, 0, 0);
     rectMode(CENTER);
     rect(posX, posY, width, height);
+    println("Dim " + width + ", " + height);
   }
   
   void move(int offsetX, int offsetY) {

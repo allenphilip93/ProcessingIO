@@ -37,6 +37,7 @@ class DinoAction {
       } else if (dino.getY() == posY) {
         jumpDirection = -1;
         doAction = false;
+        dino.getHero().play();
       }
     }
   }

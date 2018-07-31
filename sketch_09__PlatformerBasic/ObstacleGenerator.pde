@@ -1,17 +1,36 @@
 class ObstacleGenerator {
   
-  private ArrayList<Obstacle> obstacleList;
-  private int frameWidth;
-  private int frameHeight;
-  private int minObstacleGap;
-  private boolean hasCollision;
+  ArrayList<Obstacle> obstacleList;
+  ArrayList<String> obstacleTagList;
+  int frameWidth;
+  int frameHeight;
+  int minObstacleGap;
+  boolean hasCollision;
   
   ObstacleGenerator(int frameWidth, int frameHeight) {
     this.frameWidth = frameWidth;
     this.frameHeight = frameHeight;
     this.minObstacleGap = frameWidth/3;
     this.hasCollision = false;
+    loadObstacleTagList();
+  }
+  
+  void loadObstacleTagList() {
     obstacleList = new ArrayList();
+    obstacleTagList = new ArrayList();
+    obstacleTagList.add("bat");
+    //obstacleTagList.add("darwin");
+    //obstacleTagList.add("einstein");
+    //obstacleTagList.add("fighter");
+    obstacleTagList.add("monster1");
+    obstacleTagList.add("monster2");
+    obstacleTagList.add("monster3");
+    //obstacleTagList.add("newton");
+  }
+  
+  String getRandomObstacle() {
+    int randIdx = (int) Math.floor(random(0, obstacleTagList.size()));
+    return obstacleTagList.get(randIdx);
   }
   
   boolean hasCollided() {
@@ -20,7 +39,7 @@ class ObstacleGenerator {
   
   void prepare() {
     if (obstacleList.size() == 0) {
-      Obstacle obstacle = new Obstacle(frameWidth + 50, 4*frameHeight/5);
+      Obstacle obstacle = new Obstacle(frameWidth + 50, 4*frameHeight/5, getRandomObstacle());
       obstacleList.add(obstacle);
     }
   }
@@ -56,7 +75,7 @@ class ObstacleGenerator {
       if (obstacleList.size() > 0) {
         int lastPosX = obstacleList.get(obstacleList.size() -1).getX();
         if ((width - lastPosX) > minObstacleGap) {
-          obstacleList.add(new Obstacle(frameWidth + (int)random(50,250), 4*frameHeight/5));
+          obstacleList.add(new Obstacle(frameWidth + (int)random(50,250), 4*frameHeight/5, getRandomObstacle()));
         }
       }
     }
@@ -84,14 +103,6 @@ class ObstacleGenerator {
     if (maxDinoX > minObstacleX && maxDinoY > minObstacleY) {
       if (minDinoX < maxObstacleX && minDinoY < maxObstacleY) {
         isOverlapping = true;
-        println("Collision has occurred!");
-        //stroke(255, 0, 0);
-        //println("Dino X : " + maxDinoX);
-        //println("Dino Y : " + maxDinoY);
-        //println("Obstacle X : " + minObstacleX);
-        //println("Obstacle Y : " + minObstacleY);
-        //line(0, 0, maxDinoX, maxDinoY); 
-        //line(0, 0, minObstacleX, minObstacleY);
       }
     }
     return isOverlapping;
