@@ -20,7 +20,7 @@ class Game {
     this.dinoPosX = x;
     this.dinoPosY = y;
     this.jumpHeight = 200;
-    this.gameSpeed = 5;
+    this.gameSpeed = 8;
     font = createFont("ArcadeClassic",16,true);
     bg = loadImage("./data/bg_country_rgb.png");
     bg.resize(width, height);
@@ -51,8 +51,8 @@ class Game {
     stroke(255);
     fill(255);
     textFont(font, 18);
-    text("HI SCORE " + highScore, 4*width/5, height/7 - 20);
-    text("SCORE " + score, 4*width/5, height/7);
+    text("HI SCORE " + highScore, 5*width/6, height/7 - 20);
+    text("SCORE " + score, 5*width/6, height/7);
     
     // Display the obstracle
     obstacleGenerator.display();
@@ -61,7 +61,7 @@ class Game {
     dino.display();
     
     if (action.doAction()) {
-      dino.getHero().pause();
+      dino.getGif().pause();
       action.jump(dino, gameSpeed);
     }
     
@@ -77,6 +77,13 @@ class Game {
       if (score > highScore) {
         highScore = score;
       }
+      stroke(255);
+      fill(255);
+      textFont(font, 54);
+      textAlign(CENTER);
+      text("GAME OVER", width/2, height/2);
+      textFont(font, 18);
+      text("Press ENTER to try again", width/2, height/2 + 50);
     } else {
       // Move the background
       bgMove();

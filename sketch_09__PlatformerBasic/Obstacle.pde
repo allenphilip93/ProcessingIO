@@ -4,28 +4,26 @@ class Obstacle {
   int posX, posY;
   int width, height;
   PImage img;
-  Gif obstacleGif;
+  Gif obstacle;
   
   Obstacle(int posX, int posY, String giphyTag) {
     this.posX = posX;
     this.posY = posY;
-    obstacleGif = new Gif(app, "./data/obstacles/" + giphyTag + ".gif");
-    float aspectRatio = obstacleGif.width*1./obstacleGif.height*1.;
-    this.height = 100;
-    this.width = (int) (aspectRatio * height);
-    obstacleGif.play();
+    obstacle = new Gif(app, "./data/min-obstacles/" + giphyTag + ".gif");
+    this.height = obstacle.height;
+    this.width = obstacle.width;
+    println("Spawning " + giphyTag + " of dimensions (" + width + ", " + height + ")");
+    obstacle.play();
   }
   
   void display() {
-    
     imageMode(CENTER);
-    image(obstacleGif, posX, posY, width, height);
+    image(obstacle, posX, posY);
     
     stroke(255, 0, 0);
     fill(255, 0, 0, 0);
     rectMode(CENTER);
-    rect(posX, posY, width, height);
-    println("Dim " + width + ", " + height);
+    rect(posX, posY, this.width, this.height);
   }
   
   void move(int offsetX, int offsetY) {
@@ -42,11 +40,15 @@ class Obstacle {
   }
   
   int getWidth(){
-    return width;
+    return this.width;
   }
   
   int getHeight(){
-    return height;
+    return this.height;
+  }
+  
+  Gif getGif() {
+    return obstacle;
   }
   
   void debug() {
