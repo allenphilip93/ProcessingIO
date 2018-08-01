@@ -20,16 +20,29 @@ void draw() {
 
 void keyPressed() {
   //println("keyCode="+keyCode+" \tkey="+int(key)+" \ttype="+key);
-  int UP = 38;
-  int DOWN = 40;
   
-  if (key == ' ') {
-    println("Dino jump triggered!");
+  if (keyCode == 38) {
+    println("Hero move up triggered!");
     dinoGame.dinoJump();
   }
   
-  if (key == SHIFT) {
-    println("Dino duck triggered!");
+  if (keyCode == 40) {
+    println("Hero move down triggered!");
+  }
+  
+  if (keyCode == 39) {
+    println("Hero move right triggered!");
+    dinoGame.getDino().move(dinoGame.gameSpeed, 0);
+    dinoGame.obstacleGenerator.move(dinoGame.gameSpeed);
+    dinoGame.bgMove(1);
+    
+  }
+  
+  if (keyCode == 37) {
+    println("Hero move left triggered!");
+    dinoGame.getDino().move(-dinoGame.gameSpeed, 0);
+    dinoGame.obstacleGenerator.move(-dinoGame.gameSpeed);
+    dinoGame.bgMove(-1);
   }
   
   if (key == ESC) {

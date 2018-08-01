@@ -1,3 +1,4 @@
+
 import gifAnimation.*;
 
 class Obstacle {

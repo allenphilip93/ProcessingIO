@@ -65,7 +65,7 @@ class Game {
       action.jump(dino, gameSpeed);
     }
     
-    obstacleGenerator.move(gameSpeed);
+    //obstacleGenerator.move(gameSpeed);
     
     obstacleGenerator.checkBounds();
     
@@ -86,7 +86,7 @@ class Game {
       text("Press ENTER to try again", width/2, height/2 + 50);
     } else {
       // Move the background
-      bgMove();
+      //bgMove();
       
       // Make dino run
       dino.run();
@@ -103,8 +103,8 @@ class Game {
     }
   }
   
-  void bgMove() {
-    bgPosX = bgPosX - gameSpeed;
+  void bgMove(int dir) {
+    bgPosX = bgPosX - dir * gameSpeed;
     if (bgPosX == -width) {
       bgPosX = 0;
     }
